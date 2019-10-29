@@ -1,12 +1,14 @@
 package no.sandvika.springbreak.repository;
 
 import no.sandvika.springbreak.domain.BookableItem;
+import no.sandvika.springbreak.domain.ItemLocation;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+@Component
+public interface BookableItemRepository extends CrudRepository<BookableItem, Long> {
+    BookableItem findByItemName(String itemName);
 
-public class BookableItemRepository {
-    public List<BookableItem> findAll() {
-        return new ArrayList<>();
-    }
 }
