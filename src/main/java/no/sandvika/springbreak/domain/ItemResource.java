@@ -1,23 +1,14 @@
 package no.sandvika.springbreak.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import java.awt.print.Book;
+import org.springframework.data.annotation.Id;
 
-@Entity
 public class ItemResource {
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
 
     private String resourceName;
     private Double amount;
 
-    @ManyToOne
-    @JoinColumn(name = "resources")
     private BookableItem item;
 
     public ItemResource(String resourceName, Double amount, BookableItem bookableItem) {
@@ -37,7 +28,7 @@ public class ItemResource {
         return amount;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 }

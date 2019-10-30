@@ -20,18 +20,10 @@ public class BookableItemService {
         this.itemLocationRepository = itemLocationRepository;
         this.itemResourceRepository = itemResourceRepository;
 
-        BookableItem printer = createItem("Printer", "Sandvika");
-        addResourceToItem("Grønt blekk", 1.0, printer);
-        addResourceToItem("Blått blekk", 2.0, printer);
+        BookableItem bookableItem = new BookableItem("Printer");
+        bookableItem.setItemLocation(new ItemLocation("Sandvika"));
 
-        BookableItem bil = createItem("Bil", "Kongsberg");
-        addResourceToItem("Koppholder", 1.0, bil);
-        addResourceToItem("Doerer", 4.0, bil);
-
-        BookableItem printerFraDatabase = bookableItemRepository.findByItemName("Printer");
-        Integer numberOfResouces = printerFraDatabase.getResources().size();
-
-        Integer foo = 10;
+        bookableItemRepository.save(bookableItem);
     }
 
     private BookableItem createItem(String name, String location) {

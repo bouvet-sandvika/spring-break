@@ -1,21 +1,14 @@
 package no.sandvika.springbreak.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import org.springframework.data.annotation.Id;
+
 import java.time.LocalDate;
 
-@Entity
 public class Booking {
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
     private String booker;
 
-    @ManyToOne
-    @JoinColumn(name = "bookings")
     private BookableItem item;
     private LocalDate start;
     private LocalDate end;

@@ -1,14 +1,10 @@
 package no.sandvika.springbreak.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
 
-@Entity
 public class ItemLocation {
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
 
     private String locationName;
 

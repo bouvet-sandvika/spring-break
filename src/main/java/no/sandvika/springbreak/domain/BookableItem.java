@@ -1,28 +1,22 @@
 package no.sandvika.springbreak.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Document
 public class BookableItem {
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
 
     private String itemName;
 
-    @OneToOne(targetEntity = ItemLocation.class)
     private ItemLocation itemLocation;
 
-    @OneToMany(targetEntity = Booking.class, mappedBy = "item")
     private List<Booking> bookings;
 
-    @OneToMany(targetEntity = ItemResource.class, mappedBy = "item")
     private List<ItemResource> resources;
 
     public BookableItem(String itemName) {
@@ -51,7 +45,7 @@ public class BookableItem {
         return resources;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
