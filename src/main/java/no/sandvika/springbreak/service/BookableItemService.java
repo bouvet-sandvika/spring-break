@@ -36,7 +36,6 @@ public class BookableItemService {
 
     private BookableItem createItem(String name, String location) {
         ItemLocation minLocation = new ItemLocation(location);
-        itemLocationRepository.save(minLocation);
         BookableItem bookableItem = new BookableItem(name);
         bookableItem.setItemLocation(minLocation);
         return bookableItemRepository.save(bookableItem);
@@ -44,7 +43,6 @@ public class BookableItemService {
 
     private void addResourceToItem(String resourceName, Double amount, BookableItem bookableItem) {
         ItemResource itemResource = new ItemResource(resourceName, amount, bookableItem);
-        itemResourceRepository.save(itemResource);
         bookableItem.addResource(itemResource);
         bookableItemRepository.save(bookableItem);
     }

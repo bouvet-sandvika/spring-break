@@ -1,6 +1,8 @@
 package no.sandvika.springbreak.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -16,13 +18,13 @@ public class BookableItem {
 
     private String itemName;
 
-    @OneToOne(targetEntity = ItemLocation.class)
+    @OneToOne(targetEntity = ItemLocation.class, cascade = CascadeType.PERSIST)
     private ItemLocation itemLocation;
 
-    @OneToMany(targetEntity = Booking.class, mappedBy = "item")
+    @OneToMany(targetEntity = Booking.class, mappedBy = "item", cascade = CascadeType.PERSIST)
     private List<Booking> bookings;
 
-    @OneToMany(targetEntity = ItemResource.class, mappedBy = "item")
+    @OneToMany(targetEntity = ItemResource.class, mappedBy = "item", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<ItemResource> resources;
 
     public BookableItem(String itemName) {
