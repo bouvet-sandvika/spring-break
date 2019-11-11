@@ -7,6 +7,9 @@ public class ItemLocation {
         this.locationName = locationName;
     }
 
+    public ItemLocation() {
+    }
+
     public String getLocationName() {
         return locationName;
     }

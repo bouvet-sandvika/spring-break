@@ -16,6 +16,9 @@ public class BookableItem {
         this.resources = new ArrayList<>();
     }
 
+    public BookableItem() {
+    }
+
     public String getItemName() {
         return itemName;
     }
@@ -30,5 +33,17 @@ public class BookableItem {
 
     public List<ItemResource> getResources() {
         return resources;
+    }
+
+    public void addBooking(Booking booking) {
+        this.bookings.add(booking);
+    }
+
+    public void addResource(ItemResource itemResource) {
+        this.resources.add(itemResource);
+    }
+
+    public void setItemLocation(ItemLocation itemLocation) {
+        this.itemLocation = itemLocation;
     }
 }
