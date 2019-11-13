@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookableItem {
+    private Long id;
     private String itemName;
     private ItemLocation itemLocation;
     private List<Booking> bookings;
     private List<ItemResource> resources;
 
-    public BookableItem(String itemName) {
+    public BookableItem(Long id, String itemName) {
+        this.id = id;
         this.itemName = itemName;
         this.itemLocation = null;
         this.bookings = new ArrayList<>();
@@ -45,5 +47,9 @@ public class BookableItem {
 
     public void setItemLocation(ItemLocation itemLocation) {
         this.itemLocation = itemLocation;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

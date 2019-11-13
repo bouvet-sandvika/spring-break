@@ -1,11 +1,13 @@
 package no.sandvika.springbreak.domain;
 
 public class ItemResource {
+    private Long id;
     private String resourceName;
     private Double amount;
     private BookableItem item;
 
-    public ItemResource(String resourceName, Double amount, BookableItem bookableItem) {
+    public ItemResource(Long id, String resourceName, Double amount, BookableItem bookableItem) {
+        this.id = id;
         this.resourceName = resourceName;
         this.amount = amount;
         this.item = bookableItem;
@@ -20,5 +22,9 @@ public class ItemResource {
 
     public Double getAmount() {
         return amount;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
