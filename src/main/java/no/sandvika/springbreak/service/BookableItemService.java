@@ -1,35 +1,29 @@
 package no.sandvika.springbreak.service;
 
-import no.sandvika.springbreak.domain.BookableItem;
-import no.sandvika.springbreak.domain.ItemLocation;
-import no.sandvika.springbreak.domain.ItemResource;
+import no.sandvika.springbreak.domain.Booking;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class BookableItemService {
-    public List<BookableItem> getAllBookableItems() {
-        BookableItem printer = createItem("Printer", "Sandvika");
-        addResourceToItem("Grønt blekk", 1.0, printer);
-        addResourceToItem("Blått blekk", 2.0, printer);
 
-        BookableItem partyLion = createItem("Partyløven", "Sandvika");
-        addResourceToItem("BatteriProsent", 100.0, partyLion);
+    private List<Booking> bookings;
 
-        return Arrays.asList(printer, partyLion);
+    public BookableItemService() {
+        this.bookings = new ArrayList<>();
     }
 
-    private BookableItem createItem(String name, String location) {
-        ItemLocation minLocation = new ItemLocation(location);
-        BookableItem bookableItem = new BookableItem(name);
-        bookableItem.setItemLocation(minLocation);
-        return bookableItem;
+    public Booking saveNewBookng(Booking booking) {
+        bookings.add(booking);
+        return booking;
     }
 
-    private void addResourceToItem(String resourceName, Double amount, BookableItem bookableItem) {
-        ItemResource itemResource = new ItemResource(resourceName, amount, bookableItem);
-        bookableItem.addResource(itemResource);
+    public Booking getBooking(Long id) {
+        return bookings.stream()
+                .filter(b -> b.getId().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 }
