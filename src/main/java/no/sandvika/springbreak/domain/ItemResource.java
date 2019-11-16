@@ -3,9 +3,7 @@ package no.sandvika.springbreak.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import java.awt.print.Book;
 
 @Entity
 public class ItemResource {
@@ -17,13 +15,12 @@ public class ItemResource {
     private Double amount;
 
     @ManyToOne
-    @JoinColumn(name = "resources")
-    private BookableItem item;
+    private BookableItem bookableItem;
 
     public ItemResource(String resourceName, Double amount, BookableItem bookableItem) {
         this.resourceName = resourceName;
         this.amount = amount;
-        this.item = bookableItem;
+        this.bookableItem = bookableItem;
     }
 
     public ItemResource() {
@@ -39,5 +36,9 @@ public class ItemResource {
 
     public Long getId() {
         return id;
+    }
+
+    public BookableItem getBookableItem() {
+        return bookableItem;
     }
 }
