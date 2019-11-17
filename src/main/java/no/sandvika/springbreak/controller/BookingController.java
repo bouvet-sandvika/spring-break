@@ -20,8 +20,7 @@ public class BookingController {
     @GetMapping("/bookings")
     public BookingsDto getAllBookings(@RequestParam(value = "location", required = false) String location,
                                       @RequestParam(value = "booker", required = false) String booker,
-                                      @RequestParam(value = "name", required = false) String itemName
-                                      ) {
+                                      @RequestParam(value = "name", required = false) String itemName) {
         return bookableItemService.getBookings(itemName, location, booker);
     }
 
