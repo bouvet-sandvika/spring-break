@@ -3,26 +3,16 @@ package no.sandvika.springbreak.dto;
 import java.time.LocalDate;
 
 public class BookingDto {
-    private Long id;
     private String booker;
     private BookableItemDto item;
     private LocalDate start;
     private LocalDate end;
 
-    public BookingDto(Long id, String booker, BookableItemDto item, LocalDate start, LocalDate end) {
-        this.id = id;
+    public BookingDto(String booker, BookableItemDto item, LocalDate start, LocalDate end) {
         this.booker = booker;
         this.item = item;
         this.start = start;
         this.end = end;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getBooker() {

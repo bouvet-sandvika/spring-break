@@ -1,12 +1,10 @@
 package no.sandvika.springbreak.service;
 
-import no.sandvika.springbreak.controller.BookingConflictException;
-import no.sandvika.springbreak.controller.BookingNotFoundException;
 import no.sandvika.springbreak.domain.Booking;
 import no.sandvika.springbreak.dto.BookingDto;
+import no.sandvika.springbreak.dto.BookingsDto;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,11 +21,13 @@ public class BookableItemService {
         this.bookings = new HashMap<>();
     }
 
-    public BookingDto saveNewBookng(BookingDto bookingDto) throws BookingConflictException {
-        if (bookings.get(bookingDto.getId()) != null) {
-            throw new BookingConflictException();
-        }
-        bookings.put(bookingDto.getId(), dtoMapperService.toBooking(bookingDto));
+    public BookingDto saveNewBookng(BookingDto bookingDto) {
+        Long lastId = bookings.keySet().stream()
+                .sorted()
+                .reduce((first, second) -> second)
+                .orElse(null);
+        Long nextId = (lastId != null) ? lastId+1 : 1;
+        bookings.put(nextId, dtoMapperService.toBooking(nextId, bookingDto));
         return bookingDto;
     }
 
@@ -44,7 +44,7 @@ public class BookableItemService {
         if (booking == null) {
             throw new BookingNotFoundException();
         }
-        bookings.put(id, dtoMapperService.toBooking(bookingDto));
+        bookings.put(id, dtoMapperService.toBooking(id, bookingDto));
         return bookingDto;
     }
 
@@ -56,9 +56,10 @@ public class BookableItemService {
         bookings.remove(id);
     }
 
-    public List<BookingDto> getAllBookings() {
-        return bookings.values().stream()
+    public BookingsDto getAllBookings() {
+        List<BookingDto> bookings = this.bookings.values().stream()
                 .map(b -> dtoMapperService.toBookingDto(b))
                 .collect(Collectors.toList());
+        return new BookingsDto(bookings);
     }
 }

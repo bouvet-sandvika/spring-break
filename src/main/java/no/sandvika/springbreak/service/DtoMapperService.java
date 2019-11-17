@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DtoMapperService {
-    Booking toBooking(BookingDto bookingDto) {
+    Booking toBooking(Long id, BookingDto bookingDto) {
         BookableItem bookableItem = toBookableItem(bookingDto.getItem());
-        return new Booking(bookingDto.getId(), bookingDto.getBooker(), bookableItem, bookingDto.getStart(), bookingDto.getEnd());
+        return new Booking(id, bookingDto.getBooker(), bookableItem, bookingDto.getStart(), bookingDto.getEnd());
     }
 
     BookingDto toBookingDto(Booking booking) {
         BookableItemDto bookableItemDto = toBookableItemDto(booking.getItem());
-        return new BookingDto(booking.getId(), booking.getBooker(), bookableItemDto, booking.getStart(), booking.getEnd());
+        return new BookingDto(booking.getBooker(), bookableItemDto, booking.getStart(), booking.getEnd());
     }
 
     private BookableItemDto toBookableItemDto(BookableItem bookableItem) {
