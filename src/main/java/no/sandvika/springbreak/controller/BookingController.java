@@ -8,8 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-
 @RestController
 public class BookingController {
 
@@ -20,12 +18,12 @@ public class BookingController {
     }
 
     @GetMapping("/bookings")
-    public BookingsDto getAllBookings() {
-        return bookableItemService.getAllBookings();
+    public BookingsDto getAllBookings(@RequestParam(value = "location", required = false) String location,
+                                      @RequestParam(value = "booker", required = false) String booker,
+                                      @RequestParam(value = "name", required = false) String itemName
+                                      ) {
+        return bookableItemService.getBookings(itemName, location, booker);
     }
-
-//    @GetMapping("/bookings")
-//    public List<BookingDto> getBookingsByLocation()
 
     @PostMapping("/bookings")
     public BookingDto postBooking(@RequestBody BookingDto booking) {

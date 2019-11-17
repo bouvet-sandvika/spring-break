@@ -26,7 +26,7 @@ public class BookableItemService {
                 .sorted()
                 .reduce((first, second) -> second)
                 .orElse(null);
-        Long nextId = (lastId != null) ? lastId+1 : 1;
+        Long nextId = (lastId != null) ? lastId + 1 : 1;
         bookings.put(nextId, dtoMapperService.toBooking(nextId, bookingDto));
         return bookingDto;
     }
@@ -56,8 +56,11 @@ public class BookableItemService {
         bookings.remove(id);
     }
 
-    public BookingsDto getAllBookings() {
+    public BookingsDto getBookings(String itemName, String location, String booker) {
         List<BookingDto> bookings = this.bookings.values().stream()
+                .filter(b -> itemName == null || b.getItem().getItemName().equals(itemName))
+                .filter(b -> location == null || b.getItem().getItemLocation().getLocationName().equals(location))
+                .filter(b -> booker == null || b.getBooker().equals(booker))
                 .map(b -> dtoMapperService.toBookingDto(b))
                 .collect(Collectors.toList());
         return new BookingsDto(bookings);
