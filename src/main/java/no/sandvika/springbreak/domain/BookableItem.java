@@ -10,10 +10,10 @@ public class BookableItem {
     private List<Booking> bookings;
     private List<ItemResource> resources;
 
-    public BookableItem(Long id, String itemName) {
+    public BookableItem(Long id, String itemName, ItemLocation itemLocation) {
         this.id = id;
         this.itemName = itemName;
-        this.itemLocation = null;
+        this.itemLocation = itemLocation;
         this.bookings = new ArrayList<>();
         this.resources = new ArrayList<>();
     }
