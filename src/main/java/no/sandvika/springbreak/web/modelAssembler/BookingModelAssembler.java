@@ -33,7 +33,7 @@ public class BookingModelAssembler extends RepresentationModelAssemblerSupport<B
     }
 
     private BookingModel getBookingModel(Booking entity) {
-        BookableItemModel bookableItemModel = bookableItemModelAssembler.toModel(entity.getBookableItem());
+        BookableItemModel bookableItemModel = bookableItemModelAssembler.toModel(entity.getItem());
         return new BookingModel(entity.getBooker(), bookableItemModel, entity.getStart(), entity.getEnd());
     }
 

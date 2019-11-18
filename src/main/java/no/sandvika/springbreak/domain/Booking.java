@@ -3,6 +3,7 @@ package no.sandvika.springbreak.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
@@ -14,13 +15,14 @@ public class Booking {
     private String booker;
 
     @ManyToOne
-    private BookableItem bookableItem;
+    @JoinColumn(name = "bookings")
+    private BookableItem item;
     private LocalDate start;
     private LocalDate end;
 
-    public Booking(String booker, BookableItem bookableItem, LocalDate start, LocalDate end) {
+    public Booking(String booker, BookableItem item, LocalDate start, LocalDate end) {
         this.booker = booker;
-        this.bookableItem = bookableItem;
+        this.item = item;
         this.start = start;
         this.end = end;
     }
@@ -32,8 +34,8 @@ public class Booking {
         return booker;
     }
 
-    public BookableItem getBookableItem() {
-        return bookableItem;
+    public BookableItem getItem() {
+        return item;
     }
 
     public LocalDate getStart() {

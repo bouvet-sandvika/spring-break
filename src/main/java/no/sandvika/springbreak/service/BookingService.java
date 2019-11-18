@@ -48,8 +48,8 @@ public class BookingService {
 
     public List<Booking> getBookings(String itemName, String location, String booker) {
         return this.bookings.values().stream()
-                .filter(b -> itemName == null || b.getBookableItem().getItemName().equals(itemName))
-                .filter(b -> location == null || b.getBookableItem().getItemLocation().getLocationName().equals(location))
+                .filter(b -> itemName == null || b.getItem().getItemName().equals(itemName))
+                .filter(b -> location == null || b.getItem().getItemLocation().getLocationName().equals(location))
                 .filter(b -> booker == null || b.getBooker().equals(booker))
                 .collect(Collectors.toList());
     }
