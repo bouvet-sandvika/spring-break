@@ -1,4 +1,4 @@
-package no.sandvika.springbreak.controller;
+package no.sandvika.springbreak.web.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,14 +1,20 @@
-package no.sandvika.springbreak.dto;
+package no.sandvika.springbreak.web.model;
+
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
 import java.time.LocalDate;
 
-public class BookingDto {
+import static no.sandvika.springbreak.web.Rels.BOOKINGS;
+
+@Relation(collectionRelation = BOOKINGS)
+public class BookingModel extends RepresentationModel<BookingModel> {
     private String booker;
-    private BookableItemDto item;
+    private BookableItemModel item;
     private LocalDate start;
     private LocalDate end;
 
-    public BookingDto(String booker, BookableItemDto item, LocalDate start, LocalDate end) {
+    public BookingModel(String booker, BookableItemModel item, LocalDate start, LocalDate end) {
         this.booker = booker;
         this.item = item;
         this.start = start;
@@ -23,11 +29,11 @@ public class BookingDto {
         this.booker = booker;
     }
 
-    public BookableItemDto getItem() {
+    public BookableItemModel getItem() {
         return item;
     }
 
-    public void setItem(BookableItemDto item) {
+    public void setItem(BookableItemModel item) {
         this.item = item;
     }
 

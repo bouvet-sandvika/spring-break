@@ -1,10 +1,12 @@
-package no.sandvika.springbreak.dto;
+package no.sandvika.springbreak.web.model;
 
-public class BookableItemDto {
+import org.springframework.hateoas.RepresentationModel;
+
+public class BookableItemModel extends RepresentationModel<BookableItemModel> {
     private String name;
     private String location;
 
-    public BookableItemDto(String name, String location) {
+    public BookableItemModel(String name, String location) {
         this.name = name;
         this.location = location;
     }

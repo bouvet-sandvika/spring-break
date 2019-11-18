@@ -1,8 +1,6 @@
 package no.sandvika.springbreak.service;
 
 import no.sandvika.springbreak.domain.Booking;
-import no.sandvika.springbreak.dto.BookingDto;
-import no.sandvika.springbreak.dto.BookingsDto;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -13,39 +11,31 @@ import java.util.stream.Collectors;
 @Service
 public class BookingService {
 
-    private DtoMapperService dtoMapperService;
     private Map<Long, Booking> bookings;
 
-    public BookingService(DtoMapperService dtoMapperService) {
-        this.dtoMapperService = dtoMapperService;
+    public BookingService() {
         this.bookings = new HashMap<>();
     }
 
-    public BookingDto saveNewBookng(BookingDto bookingDto) {
-        Long lastId = bookings.keySet().stream()
-                .sorted()
-                .reduce((first, second) -> second)
-                .orElse(null);
-        Long nextId = (lastId != null) ? lastId + 1 : 1;
-        bookings.put(nextId, dtoMapperService.toBooking(nextId, bookingDto));
-        return bookingDto;
+    public Booking saveBooking(Booking booking) {
+        bookings.put(booking.getId(), booking);
+        return booking;
     }
 
-    public BookingDto getBooking(Long id) throws BookingNotFoundException {
+    public Booking getBooking(Long id) throws BookingNotFoundException {
         Booking booking = bookings.get(id);
         if (booking == null) {
             throw new BookingNotFoundException();
         }
-        return dtoMapperService.toBookingDto(booking);
+        return booking;
     }
 
-    public BookingDto replaceBooking(Long id, BookingDto bookingDto) throws BookingNotFoundException {
-        Booking booking = bookings.get(id);
-        if (booking == null) {
+    public Booking replaceBooking(Long id, Booking booking) throws BookingNotFoundException {
+        if (bookings.get(id) == null) {
             throw new BookingNotFoundException();
         }
-        bookings.put(id, dtoMapperService.toBooking(id, bookingDto));
-        return bookingDto;
+        bookings.put(id, booking);
+        return booking;
     }
 
     public void deleteBooking(Long id) throws BookingNotFoundException {
@@ -56,13 +46,11 @@ public class BookingService {
         bookings.remove(id);
     }
 
-    public BookingsDto getBookings(String itemName, String location, String booker) {
-        List<BookingDto> bookings = this.bookings.values().stream()
-                .filter(b -> itemName == null || b.getItem().getItemName().equals(itemName))
-                .filter(b -> location == null || b.getItem().getItemLocation().getLocationName().equals(location))
+    public List<Booking> getBookings(String itemName, String location, String booker) {
+        return this.bookings.values().stream()
+                .filter(b -> itemName == null || b.getBookableItem().getItemName().equals(itemName))
+                .filter(b -> location == null || b.getBookableItem().getItemLocation().getLocationName().equals(location))
                 .filter(b -> booker == null || b.getBooker().equals(booker))
-                .map(b -> dtoMapperService.toBookingDto(b))
                 .collect(Collectors.toList());
-        return new BookingsDto(bookings);
     }
 }

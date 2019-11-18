@@ -43,4 +43,8 @@ public class Booking {
     public LocalDate getEnd() {
         return end;
     }
+
+    public Long getId() {
+        return id;
+    }
 }
