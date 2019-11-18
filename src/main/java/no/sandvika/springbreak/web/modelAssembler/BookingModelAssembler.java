@@ -1,12 +1,16 @@
 package no.sandvika.springbreak.web.modelAssembler;
 
 import no.sandvika.springbreak.domain.BookableItem;
+import no.sandvika.springbreak.web.controller.BookableItemController;
 import no.sandvika.springbreak.web.controller.BookingController;
 import no.sandvika.springbreak.domain.Booking;
 import no.sandvika.springbreak.web.model.BookableItemModel;
 import no.sandvika.springbreak.web.model.BookingModel;
+import org.springframework.hateoas.LinkRelation;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
+
+import static no.sandvika.springbreak.web.Rels.BOOKABLE_ITEM;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -22,8 +26,14 @@ public class BookingModelAssembler extends RepresentationModelAssemblerSupport<B
 
     @Override
     public BookingModel toModel(Booking entity) {
-        BookingModel bookingModel = getBookingModel(entity);
+        BookingModel bookingModel = new BookingModel(entity.getBooker(), null, entity.getStart(), entity.getEnd());
+        BookableItemModel bookableItemModel = bookableItemModelAssembler.toModel(entity.getItem());
+
+        bookingModel.add(linkTo(methodOn(BookableItemController.class).getBookableItem(entity.getItem().getId())).withRel(BOOKABLE_ITEM));
         bookingModel.add(linkTo(methodOn(BookingController.class).getBooking(entity.getId())).withSelfRel());
+
+        bookingModel.embed(LinkRelation.of(BOOKABLE_ITEM), bookableItemModel, false);
+
         return bookingModel;
     }
 

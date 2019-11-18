@@ -1,12 +1,12 @@
 package no.sandvika.springbreak.web.model;
 
-import org.springframework.hateoas.RepresentationModel;
+import no.sandvika.springbreak.web.HalEntityModel;
 import org.springframework.hateoas.server.core.Relation;
 
 import static no.sandvika.springbreak.web.Rels.BOOKABLE_ITEMS;
 
 @Relation(collectionRelation = BOOKABLE_ITEMS)
-public class BookableItemModel extends RepresentationModel<BookableItemModel> {
+public class BookableItemModel extends HalEntityModel<BookableItemModel> {
     private String name;
     private String location;
 

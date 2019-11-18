@@ -1,6 +1,8 @@
 package no.sandvika.springbreak.web.model;
 
-import org.springframework.hateoas.RepresentationModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import no.sandvika.springbreak.web.HalEntityModel;
 import org.springframework.hateoas.server.core.Relation;
 
 import java.time.LocalDate;
@@ -8,8 +10,9 @@ import java.time.LocalDate;
 import static no.sandvika.springbreak.web.Rels.BOOKINGS;
 
 @Relation(collectionRelation = BOOKINGS)
-public class BookingModel extends RepresentationModel<BookingModel> {
+public class BookingModel extends HalEntityModel<BookingModel> {
     private String booker;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private BookableItemModel item;
     private LocalDate start;
     private LocalDate end;
