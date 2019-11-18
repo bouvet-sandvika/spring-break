@@ -11,12 +11,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class BookableItemService {
+public class BookingService {
 
     private DtoMapperService dtoMapperService;
     private Map<Long, Booking> bookings;
 
-    public BookableItemService(DtoMapperService dtoMapperService) {
+    public BookingService(DtoMapperService dtoMapperService) {
         this.dtoMapperService = dtoMapperService;
         this.bookings = new HashMap<>();
     }
