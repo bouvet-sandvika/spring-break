@@ -1,53 +1,44 @@
 package no.sandvika.springbreak.service;
 
 import no.sandvika.springbreak.domain.Booking;
+import no.sandvika.springbreak.repository.BookingRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
 public class BookingService {
 
-    private Map<Long, Booking> bookings;
+    private BookingRepository bookingRepository;
 
-    public BookingService() {
-        this.bookings = new HashMap<>();
+    public BookingService(BookingRepository bookingRepository) {
+        this.bookingRepository = bookingRepository;
     }
 
+    @Transactional
     public Booking saveBooking(Booking booking) {
-        bookings.put(booking.getId(), booking);
-        return booking;
+
+        return bookingRepository.save(booking);
     }
 
-    public Booking getBooking(Long id) throws BookingNotFoundException {
-        Booking booking = bookings.get(id);
-        if (booking == null) {
-            throw new BookingNotFoundException();
-        }
-        return booking;
+    public Booking getBooking(Long id) {
+        return bookingRepository.findById(id).orElseThrow();
     }
 
-    public Booking replaceBooking(Long id, Booking booking) throws BookingNotFoundException {
-        if (bookings.get(id) == null) {
-            throw new BookingNotFoundException();
-        }
-        bookings.put(id, booking);
-        return booking;
+    public Booking replaceBooking(Long id, Booking booking){
+        bookingRepository.findById(id).orElseThrow();
+        return bookingRepository.save(booking);
     }
 
-    public void deleteBooking(Long id) throws BookingNotFoundException {
-        Booking booking = bookings.get(id);
-        if (booking == null) {
-            throw new BookingNotFoundException();
-        }
-        bookings.remove(id);
+    public void deleteBooking(Long id)  {
+        bookingRepository.findById(id).orElseThrow();
+        bookingRepository.deleteById(id);
     }
 
     public List<Booking> getBookings(String itemName, String location, String booker) {
-        return this.bookings.values().stream()
+        return bookingRepository.findAll().stream()
                 .filter(b -> itemName == null || b.getItem().getItemName().equals(itemName))
                 .filter(b -> location == null || b.getItem().getItemLocation().getLocationName().equals(location))
                 .filter(b -> booker == null || b.getBooker().equals(booker))

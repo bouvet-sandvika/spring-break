@@ -1,6 +1,5 @@
 package no.sandvika.springbreak.web.controller;
 
-import no.sandvika.springbreak.service.BookingNotFoundException;
 import no.sandvika.springbreak.service.BookingService;
 import no.sandvika.springbreak.web.model.BookingModel;
 import no.sandvika.springbreak.web.modelAssembler.BookingModelAssembler;
@@ -8,6 +7,8 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.NoSuchElementException;
 
 @RestController
 public class BookingController {
@@ -36,13 +37,13 @@ public class BookingController {
     public BookingModel getBooking(@PathVariable("id") Long id) {
         try {
             return bookingModelAssembler.toModel(bookingService.getBooking(id));
-        } catch (BookingNotFoundException e) {
+        } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "booking not found", e);
         }
     }
 
     @PutMapping("/bookings/{id}")
-    public BookingModel putMapping(@PathVariable("id") Long id, @RequestBody BookingModel booking) throws BookingNotFoundException {
+    public BookingModel putMapping(@PathVariable("id") Long id, @RequestBody BookingModel booking)  {
         return bookingModelAssembler.toModel(bookingService.replaceBooking(id, bookingModelAssembler.toEntity(booking)));
     }
 
@@ -50,7 +51,7 @@ public class BookingController {
     public void geleteBooking(@PathVariable("id") Long id) {
         try {
             bookingService.deleteBooking(id);
-        } catch (BookingNotFoundException e) {
+        } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "booking not found", e);
         }
     }
