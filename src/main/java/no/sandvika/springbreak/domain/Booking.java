@@ -1,21 +1,26 @@
 package no.sandvika.springbreak.domain;
 
-import org.springframework.data.annotation.Id;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
+@Entity
 public class Booking {
     @Id
-    private String id;
+    @GeneratedValue
+    private Long id;
     private String booker;
 
-    private BookableItem item;
+    @ManyToOne
+    private BookableItem bookableItem;
     private LocalDate start;
     private LocalDate end;
 
-    public Booking(String booker, BookableItem item, LocalDate start, LocalDate end) {
+    public Booking(String booker, BookableItem bookableItem, LocalDate start, LocalDate end) {
         this.booker = booker;
-        this.item = item;
+        this.bookableItem = bookableItem;
         this.start = start;
         this.end = end;
     }
@@ -27,8 +32,8 @@ public class Booking {
         return booker;
     }
 
-    public BookableItem getItem() {
-        return item;
+    public BookableItem getBookableItem() {
+        return bookableItem;
     }
 
     public LocalDate getStart() {
