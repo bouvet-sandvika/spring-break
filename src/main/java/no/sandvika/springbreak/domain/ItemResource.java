@@ -1,13 +1,17 @@
 package no.sandvika.springbreak.domain;
 
+import org.springframework.data.annotation.Id;
+
 public class ItemResource {
-    private Long id;
+    @Id
+    private String id;
+
     private String resourceName;
     private Double amount;
+
     private BookableItem item;
 
-    public ItemResource(Long id, String resourceName, Double amount, BookableItem bookableItem) {
-        this.id = id;
+    public ItemResource(String resourceName, Double amount, BookableItem bookableItem) {
         this.resourceName = resourceName;
         this.amount = amount;
         this.item = bookableItem;
@@ -24,7 +28,7 @@ public class ItemResource {
         return amount;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 }

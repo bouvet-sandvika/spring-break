@@ -1,22 +1,21 @@
 package no.sandvika.springbreak.domain;
 
+import org.springframework.data.annotation.Id;
+
 public class ItemLocation {
-    private Long id;
+    @Id
+    private String id;
+
     private String locationName;
 
-    public ItemLocation(Long id, String locationName) {
-        this.id = id;
+    public ItemLocation(String locationName) {
         this.locationName = locationName;
-    }
-
-    public ItemLocation() {
     }
 
     public String getLocationName() {
         return locationName;
     }
 
-    public Long getId() {
-        return id;
+    public ItemLocation() {
     }
 }

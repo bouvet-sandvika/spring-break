@@ -1,19 +1,27 @@
 package no.sandvika.springbreak.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Document
 public class BookableItem {
-    private Long id;
+    @Id
+    private String id;
+
     private String itemName;
+
     private ItemLocation itemLocation;
+
     private List<Booking> bookings;
+
     private List<ItemResource> resources;
 
-    public BookableItem(Long id, String itemName, ItemLocation itemLocation) {
-        this.id = id;
+    public BookableItem(String itemName) {
         this.itemName = itemName;
-        this.itemLocation = itemLocation;
+        this.itemLocation = null;
         this.bookings = new ArrayList<>();
         this.resources = new ArrayList<>();
     }
@@ -37,6 +45,10 @@ public class BookableItem {
         return resources;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public void addBooking(Booking booking) {
         this.bookings.add(booking);
     }
@@ -47,9 +59,5 @@ public class BookableItem {
 
     public void setItemLocation(ItemLocation itemLocation) {
         this.itemLocation = itemLocation;
-    }
-
-    public Long getId() {
-        return id;
     }
 }

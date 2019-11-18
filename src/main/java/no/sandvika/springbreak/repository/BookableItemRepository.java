@@ -1,12 +1,11 @@
 package no.sandvika.springbreak.repository;
 
 import no.sandvika.springbreak.domain.BookableItem;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+@Component
+public interface BookableItemRepository extends MongoRepository<BookableItem, Long> {
+    BookableItem findByItemName(String itemName);
 
-public class BookableItemRepository {
-    public List<BookableItem> findAll() {
-        return new ArrayList<>();
-    }
 }
