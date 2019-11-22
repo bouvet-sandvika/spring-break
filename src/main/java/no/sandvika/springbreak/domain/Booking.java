@@ -9,13 +9,11 @@ public class Booking {
     private String id;
     private String booker;
 
-    private BookableItem item;
     private LocalDate start;
     private LocalDate end;
 
-    public Booking(String booker, BookableItem item, LocalDate start, LocalDate end) {
+    public Booking(String booker, LocalDate start, LocalDate end) {
         this.booker = booker;
-        this.item = item;
         this.start = start;
         this.end = end;
     }
@@ -25,10 +23,6 @@ public class Booking {
 
     public String getBooker() {
         return booker;
-    }
-
-    public BookableItem getItem() {
-        return item;
     }
 
     public LocalDate getStart() {

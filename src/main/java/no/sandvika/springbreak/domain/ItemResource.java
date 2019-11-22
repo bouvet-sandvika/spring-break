@@ -9,12 +9,9 @@ public class ItemResource {
     private String resourceName;
     private Double amount;
 
-    private BookableItem item;
-
-    public ItemResource(String resourceName, Double amount, BookableItem bookableItem) {
+    public ItemResource(String resourceName, Double amount) {
         this.resourceName = resourceName;
         this.amount = amount;
-        this.item = bookableItem;
     }
 
     public ItemResource() {
