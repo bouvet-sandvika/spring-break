@@ -7,5 +7,4 @@ import org.springframework.stereotype.Component;
 @Component
 public interface BookableItemRepository extends CrudRepository<BookableItem, Long> {
     BookableItem findByItemName(String itemName);
-
 }

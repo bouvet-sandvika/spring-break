@@ -5,8 +5,6 @@ import no.sandvika.springbreak.domain.Booking;
 import no.sandvika.springbreak.domain.ItemLocation;
 import no.sandvika.springbreak.domain.ItemResource;
 import no.sandvika.springbreak.repository.BookableItemRepository;
-import no.sandvika.springbreak.repository.ItemLocationRepository;
-import no.sandvika.springbreak.repository.ItemResourceRepository;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -15,13 +13,9 @@ import java.time.LocalDate;
 public class BookableItemServiceImpl implements BookableItemService {
 
     private final BookableItemRepository bookableItemRepository;
-    private final ItemLocationRepository itemLocationRepository;
-    private final ItemResourceRepository itemResourceRepository;
 
-    public BookableItemServiceImpl(BookableItemRepository bookableItemRepository, ItemLocationRepository itemLocationRepository, ItemResourceRepository itemResourceRepository) {
+    public BookableItemServiceImpl(BookableItemRepository bookableItemRepository) {
         this.bookableItemRepository = bookableItemRepository;
-        this.itemLocationRepository = itemLocationRepository;
-        this.itemResourceRepository = itemResourceRepository;
 
         BookableItem printer = createItem("Printer", "Sandvika");
         addResourceToItem("Grønt blekk", 1.0, printer);
