@@ -26,9 +26,9 @@ public class BookableItem {
     @OneToMany(mappedBy = "bookableItem", cascade = CascadeType.ALL)
     private List<ItemResource> resources;
 
-    public BookableItem(String itemName) {
+    public BookableItem(String itemName, ItemLocation itemLocation) {
         this.itemName = itemName;
-        this.itemLocation = null;
+        this.itemLocation = itemLocation;
         this.bookings = new ArrayList<>();
         this.resources = new ArrayList<>();
     }

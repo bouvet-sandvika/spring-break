@@ -20,6 +20,10 @@ public class ItemLocation {
         return locationName;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public ItemLocation() {
     }
 }

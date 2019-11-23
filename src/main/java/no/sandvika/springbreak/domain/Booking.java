@@ -43,4 +43,16 @@ public class Booking {
     public LocalDate getEnd() {
         return end;
     }
+
+    public void setBooker(String booker) {
+        this.booker = booker;
+    }
+
+    public void setStart(LocalDate start) {
+        this.start = start;
+    }
+
+    public void setEnd(LocalDate end) {
+        this.end = end;
+    }
 }
