@@ -1,4 +1,4 @@
-package no.sandvika.springbreak.disney.domain;
+package no.sandvika.springbreak.Disney.domain;
 
 public enum Strength {
     SUPER_STRENGTH,
@@ -15,6 +15,5 @@ public enum Strength {
     COOL_LIGHT_SABER,
     CONTROL_WEATHER,
     COOL_CLAWS,
-    TELEPATICH,
-    SUPER_ANGRY
+    TELEPATICH
 }

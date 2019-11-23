@@ -1,7 +1,7 @@
-package no.sandvika.springbreak.Disney.service;
+package no.sandvika.springbreak.disney.service;
 
-import no.sandvika.springbreak.Disney.domain.DisneyCharacter;
-import no.sandvika.springbreak.Disney.domain.Gender;
+
+import no.sandvika.springbreak.disney.domain.DisneyCharacter;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -11,11 +11,11 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.of;
-import static no.sandvika.springbreak.Disney.domain.Franchise.MARVEL;
-import static no.sandvika.springbreak.Disney.domain.Franchise.STAR_WARS;
-import static no.sandvika.springbreak.Disney.domain.Gender.FEMALE;
-import static no.sandvika.springbreak.Disney.domain.Strength.*;
 
+import static no.sandvika.springbreak.disney.domain.Franchise.MARVEL;
+import static no.sandvika.springbreak.disney.domain.Franchise.STAR_WARS;
+import static no.sandvika.springbreak.disney.domain.Gender.FEMALE;
+import static no.sandvika.springbreak.disney.domain.Strength.*;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
@@ -33,7 +33,7 @@ public class DisneyCharacterServiceTest {
                 new DisneyCharacter(
                         "Storm",
                         false,
-                        Gender.FEMALE,
+                        FEMALE,
                         MARVEL,
                         of(
                                 CAN_FLY,
@@ -43,7 +43,7 @@ public class DisneyCharacterServiceTest {
                 new DisneyCharacter(
                         "Phoenix",
                         false,
-                        Gender.FEMALE,
+                        FEMALE,
                         MARVEL,
                         of(
                                 CAN_FLY,

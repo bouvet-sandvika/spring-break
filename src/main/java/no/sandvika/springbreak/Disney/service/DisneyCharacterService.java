@@ -1,6 +1,6 @@
-package no.sandvika.springbreak.Disney.service;
+package no.sandvika.springbreak.disney.service;
 
-import no.sandvika.springbreak.Disney.domain.DisneyCharacter;
+import no.sandvika.springbreak.disney.domain.DisneyCharacter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,6 @@ import java.util.List;
 
 public class DisneyCharacterService {
     public List<DisneyCharacter> allFemaleCharacters() {
-       return new ArrayList<>();
+        return new ArrayList<>();
     }
 }

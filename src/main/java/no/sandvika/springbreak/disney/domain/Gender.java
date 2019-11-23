@@ -1,4 +1,4 @@
-package no.sandvika.springbreak.disney.domain;
+package no.sandvika.springbreak.Disney.domain;
 
 public enum Gender {
     MALE,

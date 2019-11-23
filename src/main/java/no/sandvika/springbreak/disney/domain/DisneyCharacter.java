@@ -1,4 +1,4 @@
-package no.sandvika.springbreak.disney.domain;
+package no.sandvika.springbreak.Disney.domain;
 
 import java.util.List;
 import java.util.Objects;
@@ -60,16 +60,5 @@ public class DisneyCharacter {
     @Override
     public int hashCode() {
         return Objects.hash(name, human, gender, franchise, strengths);
-    }
-
-    @Override
-    public String toString() {
-        return "DisneyCharacter{" +
-                "name='" + name + '\'' +
-                ", human=" + human +
-                ", gender=" + gender +
-                ", franchise=" + franchise +
-                ", strengths=" + strengths +
-                '}';
     }
 }

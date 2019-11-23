@@ -1,6 +1,7 @@
-package no.sandvika.springbreak.Disney.domain;
+package no.sandvika.springbreak.disney.domain;
 
 public enum  Franchise {
     STAR_WARS,
-    MARVEL
+    MARVEL,
+    DISNEY
 }
