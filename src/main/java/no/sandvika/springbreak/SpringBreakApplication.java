@@ -12,8 +12,6 @@ public class SpringBreakApplication {
         ConfigurableApplicationContext ctx = SpringApplication.run(SpringBreakApplication.class, args);
 
         BookingService bookingService = ctx.getBean(BookingService.class);
-        String location = "Sandvika";
-        bookingService.lagreNyLocation(location);
-        bookingService.lagreBookableItems(location);
+        bookingService.lagreBookableItems();
     }
 }
