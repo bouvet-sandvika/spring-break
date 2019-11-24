@@ -6,5 +6,5 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface ItemLocationRepository extends CrudRepository<ItemLocation, Long> {
-
+    ItemLocation findByLocationName(String locationName);
 }
