@@ -32,7 +32,7 @@ public class BookingModelAssembler extends RepresentationModelAssemblerSupport<B
         bookingModel.add(linkTo(methodOn(BookableItemController.class).getBookableItem(entity.getBookableItem().getId())).withRel(BOOKABLE_ITEM));
         bookingModel.add(linkTo(methodOn(BookingController.class).getBooking(entity.getId())).withSelfRel());
 
-        bookingModel.embed(LinkRelation.of(BOOKABLE_ITEM), bookableItemModel, false);
+
 
         return bookingModel;
     }

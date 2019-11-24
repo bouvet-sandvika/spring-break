@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -50,7 +49,7 @@ public class BookingService {
 
     @Transactional
     public void lagreBooking() {
-        BookableItem bookableItem = bookableItemRepository.findAll().get(0);
+        BookableItem bookableItem = bookableItemRepository.findAll().get(1);
         Booking booking = new Booking("Eirik Aasved Hoslt", bookableItem, LocalDate.of(2019, 12, 31), LocalDate.of(2020, 1, 1));
         bookingRepository.save(booking);
     }
