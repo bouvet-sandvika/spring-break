@@ -22,4 +22,8 @@ public class BookableItemService {
     public BookableItem getBookableItem(Long id) {
         return bookableItemRepository.findById(id).orElse(null);
     }
+
+    public BookableItem saveBookableItem(BookableItem item) {
+        return bookableItemRepository.save(item);
+    }
 }
