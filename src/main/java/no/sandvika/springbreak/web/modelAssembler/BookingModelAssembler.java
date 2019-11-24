@@ -1,9 +1,9 @@
 package no.sandvika.springbreak.web.modelAssembler;
 
 import no.sandvika.springbreak.domain.BookableItem;
+import no.sandvika.springbreak.domain.Booking;
 import no.sandvika.springbreak.web.controller.BookableItemController;
 import no.sandvika.springbreak.web.controller.BookingController;
-import no.sandvika.springbreak.domain.Booking;
 import no.sandvika.springbreak.web.model.BookableItemModel;
 import no.sandvika.springbreak.web.model.BookingModel;
 import org.springframework.hateoas.LinkRelation;
@@ -26,10 +26,10 @@ public class BookingModelAssembler extends RepresentationModelAssemblerSupport<B
 
     @Override
     public BookingModel toModel(Booking entity) {
-        BookingModel bookingModel = new BookingModel(entity.getBooker(), null, entity.getStart(), entity.getEnd());
-        BookableItemModel bookableItemModel = bookableItemModelAssembler.toModel(entity.getItem());
+        BookableItemModel bookableItemModel = bookableItemModelAssembler.toModel(entity.getBookableItem());
+        BookingModel bookingModel = new BookingModel(entity.getBooker(), bookableItemModel, entity.getStart(), entity.getEnd());
 
-        bookingModel.add(linkTo(methodOn(BookableItemController.class).getBookableItem(entity.getItem().getId())).withRel(BOOKABLE_ITEM));
+        bookingModel.add(linkTo(methodOn(BookableItemController.class).getBookableItem(entity.getBookableItem().getId())).withRel(BOOKABLE_ITEM));
         bookingModel.add(linkTo(methodOn(BookingController.class).getBooking(entity.getId())).withSelfRel());
 
         bookingModel.embed(LinkRelation.of(BOOKABLE_ITEM), bookableItemModel, false);
@@ -41,11 +41,4 @@ public class BookingModelAssembler extends RepresentationModelAssemblerSupport<B
         BookableItem bookableItem = bookableItemModelAssembler.toEntity(model.getItem());
         return new Booking(model.getBooker(), bookableItem, model.getStart(), model.getEnd());
     }
-
-    private BookingModel getBookingModel(Booking entity) {
-        BookableItemModel bookableItemModel = bookableItemModelAssembler.toModel(entity.getItem());
-        return new BookingModel(entity.getBooker(), bookableItemModel, entity.getStart(), entity.getEnd());
-    }
-
-
 }

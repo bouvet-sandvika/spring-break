@@ -1,6 +1,5 @@
 package no.sandvika.springbreak.web.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import no.sandvika.springbreak.web.HalEntityModel;
 import org.springframework.hateoas.server.core.Relation;

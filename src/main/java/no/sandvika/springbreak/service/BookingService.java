@@ -3,11 +3,10 @@ package no.sandvika.springbreak.service;
 import no.sandvika.springbreak.domain.BookableItem;
 import no.sandvika.springbreak.domain.Booking;
 import no.sandvika.springbreak.domain.ItemLocation;
-import no.sandvika.springbreak.dto.BookingDto;
-import no.sandvika.springbreak.dto.BookingsDto;
 import no.sandvika.springbreak.repository.BookableItemRepository;
 import no.sandvika.springbreak.repository.BookingRepository;
 import no.sandvika.springbreak.repository.ItemLocationRepository;
+import no.sandvika.springbreak.service.exceptions.BookingNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,8 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import static no.sandvika.springbreak.service.DtoMapperUtils.toBookingDto;
 
 @Service
 public class BookingService {
@@ -50,44 +47,27 @@ public class BookingService {
         return new BookableItem(navn, itemLocation);
     }
 
-    public BookingDto saveNewBookng(BookingDto bookingDto) throws BookableItemNotFoundException {
-        Optional<BookableItem> bookableItem = bookableItemRepository
-                .findByItemLocation_LocationNameAndItemName(
-                        bookingDto.getItem().getLocation(),
-                        bookingDto.getItem().getName());
-
-        if (bookableItem.isPresent()) {
-            Booking newBooking = new Booking(
-                    bookingDto.getBooker(),
-                    bookableItem.get(),
-                    bookingDto.getStart(),
-                    bookingDto.getEnd()
-            );
-
-            return toBookingDto(bookingRepository.save(newBooking));
-
-        } else {
-            throw new BookableItemNotFoundException();
-        }
+    public Booking saveNewBookng(Booking Booking) {
+        return bookingRepository.save(Booking);
     }
 
-    public BookingDto getBooking(Long id) throws BookingNotFoundException {
+    public Booking getBooking(Long id) throws BookingNotFoundException {
         Optional<Booking> booking = bookingRepository.findById(id);
         if (booking.isPresent()) {
-            return toBookingDto(booking.get());
+            return booking.get();
         } else {
             throw new BookingNotFoundException();
         }
     }
 
-    public BookingDto replaceBooking(Long id, BookingDto bookingDto) throws BookingNotFoundException {
+    public Booking replaceBooking(Long id, Booking Booking) throws BookingNotFoundException {
         Optional<Booking> booking = bookingRepository.findById(id);
         if (booking.isPresent()) {
             Booking updatedBooking = booking.get();
-            updatedBooking.setBooker(bookingDto.getBooker());
-            updatedBooking.setStart(bookingDto.getStart());
-            updatedBooking.setEnd(bookingDto.getEnd());
-            return toBookingDto(bookingRepository.save(updatedBooking));
+            updatedBooking.setBooker(Booking.getBooker());
+            updatedBooking.setStart(Booking.getStart());
+            updatedBooking.setEnd(Booking.getEnd());
+            return bookingRepository.save(updatedBooking);
         } else {
             throw new BookingNotFoundException();
         }
@@ -97,24 +77,11 @@ public class BookingService {
         bookingRepository.deleteById(id);
     }
 
-    public BookingsDto getBookings(String itemName, String location, String booker) {
-        List<Booking> relevanteBookings = new ArrayList<>();
-        if (itemName != null) {
-            relevanteBookings.addAll(bookingRepository.findAllByBookableItem_ItemName(itemName));
-        }
-        if (location != null) {
-            relevanteBookings.addAll(bookingRepository.findAllByBookableItem_ItemLocation_LocationName(location));
-        }
-        if (booker != null) {
-            relevanteBookings.addAll(bookingRepository.findAllByBooker(booker));
-        }
-
-        List<BookingDto> bookings = relevanteBookings.stream()
+    public List<Booking> getBookings(String itemName, String location, String booker) {
+        return bookingRepository.findAll().stream()
                 .filter(b -> itemName == null || b.getBookableItem().getItemName().equals(itemName))
                 .filter(b -> location == null || b.getBookableItem().getItemLocation().getLocationName().equals(location))
                 .filter(b -> booker == null || b.getBooker().equals(booker))
-                .map(DtoMapperUtils::toBookingDto)
                 .collect(Collectors.toList());
-        return new BookingsDto(bookings);
     }
 }

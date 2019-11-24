@@ -15,10 +15,10 @@ public class BookableItem {
     @OneToOne(targetEntity = ItemLocation.class, cascade = CascadeType.ALL)
     private ItemLocation itemLocation;
 
-    @OneToMany(targetEntity = Booking.class, mappedBy = "item")
+    @OneToMany(targetEntity = Booking.class, mappedBy = "bookableItem")
     private List<Booking> bookings;
 
-    @OneToMany(targetEntity = ItemResource.class, mappedBy = "item", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = ItemResource.class, mappedBy = "bookableItem", cascade = CascadeType.ALL)
     private List<ItemResource> resources;
 
     public BookableItem(String itemName, ItemLocation itemLocation) {

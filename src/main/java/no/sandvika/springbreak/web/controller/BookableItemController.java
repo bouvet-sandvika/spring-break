@@ -12,7 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.NoSuchElementException;
 
-@RestController()
+@RestController
 public class BookableItemController {
 
     private BookableItemService bookableItemService;

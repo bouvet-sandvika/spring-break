@@ -23,7 +23,7 @@ public class BookableItemModelAssembler extends RepresentationModelAssemblerSupp
     public BookableItemModel toModel(BookableItem entity) {
         BookableItemModel bookableItemModel = new BookableItemModel(entity.getItemName(), entity.getItemLocation().getLocationName());
         bookableItemModel.add(linkTo(methodOn(BookableItemController.class).getBookableItem(entity.getId())).withSelfRel());
-        bookableItemModel.add(linkTo(methodOn(BookingController.class).getBookings(null, null, entity.getItemName())).withRel(BOOKINGS));
+
         return bookableItemModel;
     }
 
